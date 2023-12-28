@@ -47,7 +47,10 @@ class CharityBase(Base):
 
 
 class CharityProject(CharityBase):
-    name = Column(String(100), nullable=False, unique=True)
+
+    NAME_MAX_LENGTH = 100
+
+    name = Column(String(NAME_MAX_LENGTH), nullable=False, unique=True)
     description = Column(Text, nullable=False)
 
     def __repr__(self) -> str:

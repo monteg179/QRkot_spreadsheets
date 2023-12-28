@@ -7,6 +7,8 @@ from app.models import CharityProject
 
 FORMAT = '%Y/%m/%d %H:%M:%S'
 TITLE = 'Отчёт по закрытым пожертвованиям на {}'
+ROWS_AMOUNT = 100
+COLUMNS_AMOUNT = 11
 
 
 async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
@@ -23,8 +25,8 @@ async def spreadsheets_create(wrapper_services: Aiogoogle) -> str:
                     'sheetId': 0,
                     'title': 'Лист1',
                     'gridProperties': {
-                        'rowCount': 100,
-                        'columnCount': 11
+                        'rowCount': ROWS_AMOUNT,
+                        'columnCount': COLUMNS_AMOUNT,
                     }
                 }
             }

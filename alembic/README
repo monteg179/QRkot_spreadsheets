@@ -1,1 +1,11 @@
-Generic single-database configuration with an async dbapi.
+### Команды Alembic
+
+- создание файла миграции
+```
+alembic revision --autogenerate
+```
+
+- применение миграций
+```
+alembic upgrade head
+```

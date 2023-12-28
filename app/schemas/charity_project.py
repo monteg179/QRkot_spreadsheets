@@ -8,18 +8,34 @@ from pydantic import (
     validator,
 )
 
+from app.models.charity import CharityProject as CharityProjectModel
+
 
 class CharityProjectUpdate(BaseSchema):
-    name: str = Field(None, min_length=1, max_length=100)
-    description: str = Field(None, min_length=1)
-    full_amount: int = Field(None, gt=0)
+
+    name: str = Field(
+        default=None,
+        min_length=1,
+        max_length=CharityProjectModel.NAME_MAX_LENGTH
+    )
+    description: str = Field(
+        default=None,
+        min_length=1
+    )
+    full_amount: int = Field(
+        default=None,
+        gt=0
+    )
 
     class Config:
         extra = Extra.forbid
 
 
-class CharityProjectCreate(CharityProjectUpdate):
-    name: str = Field(min_length=1, max_length=100)
+class CharityProjectCreate(BaseSchema):
+    name: str = Field(
+        min_length=1,
+        max_length=CharityProjectModel.NAME_MAX_LENGTH
+    )
     description: str = Field(min_length=1)
     full_amount: int = Field(gt=0)
 
@@ -28,6 +44,9 @@ class CharityProjectCreate(CharityProjectUpdate):
         if not value or value is None:
             raise ValueError('Все поля обязательны.')
         return value
+
+    class Config:
+        extra = Extra.forbid
 
 
 class CharityProjectDB(CharityProjectCreate):
